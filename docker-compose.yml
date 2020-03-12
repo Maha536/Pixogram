@@ -1,0 +1,169 @@
+version: '3.7'
+
+services:
+  
+  naming-service:
+    image: cts/discovery-server:0.0.1-SNAPSHOT
+    ports:
+      - "8761:8761"
+    networks:
+      - pixogram-network
+
+  
+  user-service:
+    image: cts/userservice:0.0.1-SNAPSHOT
+    ports:
+      - "7006:7006"
+    restart: always
+    depends_on:
+      - mysql 
+      - naming-service
+    environment:
+      RDS_HOSTNAME: mysql
+      RDS_PORT: 3309
+      RDS_USERNAME: root
+      RDS_PASSWORD: abc
+    networks:
+      - pixogram-network
+
+  media-service:
+    image: cts/mediaservice:0.0.1-SNAPSHOT
+    ports:
+      - "7004:7004"
+    restart: always
+    depends_on:
+      - mysql 
+      - naming-service
+    environment:
+      RDS_HOSTNAME: mysql
+      RDS_PORT: 3309
+      RDS_USERNAME: root
+      RDS_PASSWORD: abc
+    networks:
+      - pixogram-network
+  
+  action-service:
+    image: cts/actionservice:0.0.1-SNAPSHOT
+    ports:
+      - "7000:7000"
+    restart: always
+    depends_on:
+      - mysql 
+      - naming-service
+    environment:
+      RDS_HOSTNAME: mysql
+      RDS_PORT: 3309
+      RDS_USERNAME: root
+      RDS_PASSWORD: abc
+    networks:
+      - pixogram-network
+  
+  comment-service:
+    image: cts/commentservice:0.0.1-SNAPSHOT
+    ports:
+      - "7002:7002"
+    restart: always
+    depends_on:
+      - mysql 
+      - naming-service
+    environment:
+      RDS_HOSTNAME: mysql
+      RDS_PORT: 3309
+      RDS_USERNAME: root
+      RDS_PASSWORD: abc
+    networks:
+      - pixogram-network
+
+  api-gateway:
+    image: cts/api-gateway:0.0.1-SNAPSHOT
+    ports:
+      - "8765:8765"
+    restart: always
+    depends_on:
+      - mysql 
+      - naming-service
+    environment:
+      RDS_HOSTNAME: mysql
+      RDS_PORT: 3309
+      RDS_USERNAME: root
+      RDS_PASSWORD: abc
+    networks:
+      - pixogram-network
+
+  follow-service:
+    image: cts/followservice:0.0.1-SNAPSHOT
+    ports:
+      - "7003:7003"
+    restart: always
+    depends_on:
+      - mysql 
+      - naming-service
+    environment:
+      RDS_HOSTNAME: mysql
+      RDS_PORT: 3309
+      RDS_USERNAME: root
+      RDS_PASSWORD: abc
+    networks:
+      - pixogram-network
+
+  media-plumbing:
+    image: cts/media-plumbing:0.0.1-SNAPSHOT
+    ports:
+      - "7007:7007"
+    restart: always
+    depends_on:
+      - mysql 
+      - naming-service
+    environment:
+      RDS_HOSTNAME: mysql
+      RDS_PORT: 3309
+      RDS_USERNAME: root
+      RDS_PASSWORD: abc
+    networks:
+      - pixogram-network
+  
+  misc-plumbing:
+    image: cts/misc-plumbing-service:0.0.1-SNAPSHOT
+    ports:
+      - "7009:7009"
+    restart: always
+    depends_on:
+      - mysql 
+      - naming-service
+    environment:
+      RDS_HOSTNAME: mysql
+      RDS_PORT: 3309
+      RDS_USERNAME: root
+      RDS_PASSWORD: abc
+    networks:
+      - pixogram-network
+
+  newsfeed-service:
+    image: cts/newsfeedservice:0.0.1-SNAPSHOT
+    ports:
+      - "7005:7005"
+    restart: always
+    depends_on:
+      - mysql 
+      - naming-service
+    environment:
+      RDS_HOSTNAME: mysql
+      RDS_PORT: 3309
+      RDS_USERNAME: root
+      RDS_PASSWORD: abc
+    networks:
+      - pixogram-network
+
+  mysql:
+    image: mysql:5.7
+    ports:
+      - "3309:3306"
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: abc 
+    networks:
+      - pixogram-network 
+
+
+networks:
+  pixogram-network:
