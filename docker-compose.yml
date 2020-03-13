@@ -107,18 +107,13 @@ services:
       - pixogram-network
 
   media-plumbing:
-    image: cts/media-plumbing:0.0.1-SNAPSHOT
+    image: cts/mediaplumbing:0.0.1-SNAPSHOT
     ports:
       - "7007:7007"
     restart: always
-    depends_on:
-      - mysql 
+    depends_on: 
       - naming-service
-    environment:
-      RDS_HOSTNAME: mysql
-      RDS_PORT: 3309
-      RDS_USERNAME: root
-      RDS_PASSWORD: abc
+    
     networks:
       - pixogram-network
   
@@ -128,13 +123,9 @@ services:
       - "7009:7009"
     restart: always
     depends_on:
-      - mysql 
+    
       - naming-service
-    environment:
-      RDS_HOSTNAME: mysql
-      RDS_PORT: 3309
-      RDS_USERNAME: root
-      RDS_PASSWORD: abc
+    
     networks:
       - pixogram-network
 
