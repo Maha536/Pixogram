@@ -14,7 +14,7 @@ services:
     image: cts/userservice:0.0.1-SNAPSHOT
     ports:
       - "7006:7006"
-    restart: always
+ 
     depends_on:
       - mysql 
       - naming-service
@@ -30,7 +30,7 @@ services:
     image: cts/mediaservice:0.0.1-SNAPSHOT
     ports:
       - "7004:7004"
-    restart: always
+
     depends_on:
       - mysql 
       - naming-service
@@ -46,7 +46,7 @@ services:
     image: cts/actionservice:0.0.1-SNAPSHOT
     ports:
       - "7000:7000"
-    restart: always
+
     depends_on:
       - mysql 
       - naming-service
@@ -62,7 +62,7 @@ services:
     image: cts/commentservice:0.0.1-SNAPSHOT
     ports:
       - "7002:7002"
-    restart: always
+    
     depends_on:
       - mysql 
       - naming-service
@@ -78,7 +78,7 @@ services:
     image: cts/api-gateway:0.0.1-SNAPSHOT
     ports:
       - "8765:8765"
-    restart: always
+    
     depends_on:
       - mysql 
       - naming-service
@@ -94,7 +94,7 @@ services:
     image: cts/followservice:0.0.1-SNAPSHOT
     ports:
       - "7003:7003"
-    restart: always
+    
     depends_on:
       - mysql 
       - naming-service
@@ -110,7 +110,7 @@ services:
     image: cts/mediaplumbing:0.0.1-SNAPSHOT
     ports:
       - "7007:7007"
-    restart: always
+    
     depends_on: 
       - naming-service
     
@@ -121,7 +121,7 @@ services:
     image: cts/misc-plumbing-service:0.0.1-SNAPSHOT
     ports:
       - "7009:7009"
-    restart: always
+    
     depends_on:
     
       - naming-service
@@ -133,7 +133,7 @@ services:
     image: cts/newsfeedservice:0.0.1-SNAPSHOT
     ports:
       - "7005:7005"
-    restart: always
+    
     depends_on:
       - mysql 
       - naming-service
@@ -149,7 +149,7 @@ services:
     image: mysql:5.7
     ports:
       - "3309:3306"
-    restart: always
+    
     environment:
       MYSQL_ROOT_PASSWORD: abc 
     networks:
